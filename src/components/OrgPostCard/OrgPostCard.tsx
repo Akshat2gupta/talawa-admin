@@ -16,10 +16,10 @@ import {
 import { GET_USER_BY_ID } from 'GraphQl/Queries/Queries';
 import { useMinioUpload } from 'utils/MinioUpload';
 import DOMPurify from 'dompurify';
-import type { 
+import type {
   InterfacePost,
   InterfacePostAttachment,
-  InterfacePostCard 
+  InterfacePostCard,
 } from '../../types/Post/interface';
 
 interface OrgPostCardProps {
@@ -34,11 +34,9 @@ interface InterfacePostFormState {
   }[];
 }
 
-export default function OrgPostCard({
-  post,
-}: OrgPostCardProps): JSX.Element {
+export default function OrgPostCard({ post }: OrgPostCardProps): JSX.Element {
   const { uploadFileToMinio } = useMinioUpload();
-  
+
   const [postFormState, setPostFormState] = useState<InterfacePostFormState>({
     caption: post.caption,
     attachments: [],
@@ -138,9 +136,9 @@ export default function OrgPostCard({
     if (file) {
       try {
         const { fileUrl } = await uploadFileToMinio(
-          file, 
+          file,
           post.organization._id,
-          imageAttachment?.url
+          imageAttachment?.url,
         );
 
         setPostFormState((prev) => ({
@@ -171,9 +169,9 @@ export default function OrgPostCard({
       }
       try {
         const { fileUrl } = await uploadFileToMinio(
-          file, 
+          file,
           post.organization._id,
-          videoAttachment?.url
+          videoAttachment?.url,
         );
 
         setPostFormState((prev) => ({
@@ -454,7 +452,10 @@ export default function OrgPostCard({
                   .filter((a) => a.mimeType.startsWith('image/'))
                   .map((attachment, index) => (
                     <div key={index} className={styles.previewOrgPostCard}>
-                      <img src={DOMPurify.sanitize(attachment.url)} alt="Preview" />
+                      <img
+                        src={DOMPurify.sanitize(attachment.url)}
+                        alt="Preview"
+                      />
                       <button
                         type="button"
                         className={styles.closeButtonP}

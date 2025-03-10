@@ -102,7 +102,7 @@ export interface InterfaceCreator {
 export interface InterfacePostAttachment {
   createdAt: string; // Changed from Date to string since GraphQL returns string
   fileName: string;
-  url: string;  // MinIO URL
+  url: string; // MinIO URL
   mimeType: string;
   postId: string;
   name: string;
@@ -112,7 +112,7 @@ export interface InterfacePost {
   _id: string;
   text: string;
   title: string;
-  createdAt: string;  // Keep as string to match API data
+  createdAt: string; // Keep as string to match API data
   imageUrl: string | null;
   videoUrl: string | null;
   attachments?: InterfacePostAttachment[];
